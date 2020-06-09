@@ -7,4 +7,6 @@
 
     <item android:title="Configuracion"
           android:id="@+id/configuracion"/>
+    <item android:title="Info"
+        android:id="@+id/info"/>
 </menu>
