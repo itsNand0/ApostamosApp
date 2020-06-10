@@ -4,21 +4,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuPrincipal extends AppCompatActivity {
     private TextView tv_usuario;
-
+    private ExpandableListView esplv;
+    private EsplistView adapter;
+    private ArrayList<String> listCategoria;
+    private Map<String, ArrayList<String>> mapChild;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        tv_usuario = findViewById(R.id.tv_usuario);
+        esplv = (ExpandableListView) findViewById(R.id.expLv);
+        listCategoria = new ArrayList<>();
+        mapChild = new HashMap<>();
+
+        cargaDatos();
+
+        /*tv_usuario = findViewById(R.id.tv_usuario);
 
         Bundle bundle = getIntent().getExtras();
         String dato = bundle.getString("usuario");
-        tv_usuario.setText("Bienvenido " + dato);
+        tv_usuario.setText("Bienvenido " + dato);*/
 
     }
     @Override
@@ -26,4 +40,49 @@ public class MenuPrincipal extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menuprincipal, mimenu);
         return true;
     }
+
+    private void cargaDatos(){
+        ArrayList<String> listprimerJuego = new ArrayList<>();
+        ArrayList<String> listsegundoJuego = new ArrayList<>();
+        ArrayList<String> listtercerJuego = new ArrayList<>();
+        ArrayList<String> listcuartoJuego = new ArrayList<>();
+        ArrayList<String> listquintoJuego = new ArrayList<>();
+        ArrayList<String> listsextoJuego = new ArrayList<>();
+
+        listCategoria.add("a");
+        listCategoria.add("b");
+        listCategoria.add("c");
+        listCategoria.add("d");
+        listCategoria.add("e");
+        listCategoria.add("f");
+
+        listprimerJuego.add("Nueva Apuesta");
+        listprimerJuego.add("Apuestas Disponibles");
+
+        listsegundoJuego.add("Nueva Apuesta");
+        listsegundoJuego.add("Apuestas Disponibles");
+
+        listtercerJuego.add("Nueva Apuesta");
+        listtercerJuego.add("Apuestas Disponibles");
+
+        listcuartoJuego.add("Nueva Apuesta");
+        listcuartoJuego.add("Apuestas Disponibles");
+
+        listquintoJuego.add("Nueva Apuesta");
+        listquintoJuego.add("Apuestas Disponibles");
+
+        listsextoJuego.add("Nueva Apuesta");
+        listsextoJuego.add("Apuestas Disponibles");
+
+        mapChild.put(listCategoria.get(0), listprimerJuego);
+        mapChild.put(listCategoria.get(1), listsegundoJuego);
+        mapChild.put(listCategoria.get(2), listtercerJuego);
+        mapChild.put(listCategoria.get(3), listcuartoJuego);
+        mapChild.put(listCategoria.get(4), listquintoJuego);
+        mapChild.put(listCategoria.get(5), listsextoJuego);
+
+        adapter = new EsplistView(this, listCategoria, mapChild);
+        esplv.setAdapter(adapter);
+    }
+
 }
