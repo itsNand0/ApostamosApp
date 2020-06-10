@@ -2,8 +2,12 @@ package com.example.apostamos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -25,8 +29,8 @@ public class MenuPrincipal extends AppCompatActivity {
         esplv = (ExpandableListView) findViewById(R.id.expLv);
         listCategoria = new ArrayList<>();
         mapChild = new HashMap<>();
-
         cargaDatos();
+
 
         /*tv_usuario = findViewById(R.id.tv_usuario);
 
@@ -49,12 +53,12 @@ public class MenuPrincipal extends AppCompatActivity {
         ArrayList<String> listquintoJuego = new ArrayList<>();
         ArrayList<String> listsextoJuego = new ArrayList<>();
 
-        listCategoria.add("a");
-        listCategoria.add("b");
-        listCategoria.add("c");
-        listCategoria.add("d");
-        listCategoria.add("e");
-        listCategoria.add("f");
+        listCategoria.add("");
+        listCategoria.add("");
+        listCategoria.add("");
+        listCategoria.add("");
+        listCategoria.add("");
+        listCategoria.add("");
 
         listprimerJuego.add("Nueva Apuesta");
         listprimerJuego.add("Apuestas Disponibles");
@@ -84,5 +88,6 @@ public class MenuPrincipal extends AppCompatActivity {
         adapter = new EsplistView(this, listCategoria, mapChild);
         esplv.setAdapter(adapter);
     }
+
 
 }

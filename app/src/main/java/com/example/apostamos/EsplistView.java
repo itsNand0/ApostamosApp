@@ -24,6 +24,7 @@ public class EsplistView extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
+
         return listCategoria.size();
     }
 
