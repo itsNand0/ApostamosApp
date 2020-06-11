@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 if(fila.moveToFirst()) {
                 Intent i = new Intent(this, MenuPrincipal.class);
-                i.putExtra("usuario", et_usuario.getText().toString());
+                //i.putExtra("usuario", et_usuario.getText().toString());
                 startActivity(i);
                 } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectas", Toast.LENGTH_LONG).show();

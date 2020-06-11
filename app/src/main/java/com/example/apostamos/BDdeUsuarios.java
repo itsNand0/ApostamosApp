@@ -13,7 +13,6 @@ public class BDdeUsuarios extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table usuario(cedula int primary key , nombre text , apellido text, telefono int, correo text, usuario text, contraseña text)");
-
     }
 
     @Override

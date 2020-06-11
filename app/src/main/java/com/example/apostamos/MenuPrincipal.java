@@ -31,7 +31,6 @@ public class MenuPrincipal extends AppCompatActivity {
         mapChild = new HashMap<>();
         cargaDatos();
 
-
         /*tv_usuario = findViewById(R.id.tv_usuario);
 
         Bundle bundle = getIntent().getExtras();
