@@ -37,7 +37,6 @@ public class ListaUsuarios extends AppCompatActivity {
         Cursor fila = bd.rawQuery("select * from usuario",null);
         if (fila.moveToFirst()){
             do{
-              listusuario.add("Siguiente Usuario");
               listusuario.add(fila.getString(0));
               listusuario.add(fila.getString(1));
               listusuario.add(fila.getString(2));
@@ -45,6 +44,7 @@ public class ListaUsuarios extends AppCompatActivity {
               listusuario.add(fila.getString(4));
               listusuario.add(fila.getString(5));
               listusuario.add(fila.getString(6));
+              listusuario.add("Siguiente Usuario");
             }while (fila.moveToNext());
         }
     }

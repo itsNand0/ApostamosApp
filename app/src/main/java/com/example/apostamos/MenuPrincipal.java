@@ -31,6 +31,14 @@ public class MenuPrincipal extends AppCompatActivity {
         mapChild = new HashMap<>();
         cargaDatos();
 
+        esplv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Intent i = new Intent(MenuPrincipal.this, NuevaApuesta.class);
+                startActivity(i);
+                return true;
+            }
+        });
         /*tv_usuario = findViewById(R.id.tv_usuario);
 
         Bundle bundle = getIntent().getExtras();
@@ -59,22 +67,16 @@ public class MenuPrincipal extends AppCompatActivity {
         listCategoria.add("");
         listCategoria.add("");
 
-        listprimerJuego.add("Nueva Apuesta");
         listprimerJuego.add("Apuestas Disponibles");
 
-        listsegundoJuego.add("Nueva Apuesta");
         listsegundoJuego.add("Apuestas Disponibles");
 
-        listtercerJuego.add("Nueva Apuesta");
         listtercerJuego.add("Apuestas Disponibles");
 
-        listcuartoJuego.add("Nueva Apuesta");
         listcuartoJuego.add("Apuestas Disponibles");
 
-        listquintoJuego.add("Nueva Apuesta");
         listquintoJuego.add("Apuestas Disponibles");
 
-        listsextoJuego.add("Nueva Apuesta");
         listsextoJuego.add("Apuestas Disponibles");
 
         mapChild.put(listCategoria.get(0), listprimerJuego);
