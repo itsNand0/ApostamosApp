@@ -34,13 +34,19 @@ public class ListaUsuarios extends AppCompatActivity {
     private void listaUsuario(){
         BDdeUsuarios admin = new BDdeUsuarios(this,"administrador",null,1);
         SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor fila = bd.rawQuery("select cedula, nombre from usuario",null);
+        Cursor fila = bd.rawQuery("select * from usuario",null);
         if (fila.moveToFirst()){
-            cedula = fila.getString(0);
-            nombre = fila.getString(1);
+            do{
+              listusuario.add("Siguiente Usuario");
+              listusuario.add(fila.getString(0));
+              listusuario.add(fila.getString(1));
+              listusuario.add(fila.getString(2));
+              listusuario.add(fila.getString(3));
+              listusuario.add(fila.getString(4));
+              listusuario.add(fila.getString(5));
+              listusuario.add(fila.getString(6));
+            }while (fila.moveToNext());
         }
-        listusuario.add(cedula);
-        listusuario.add(nombre);
     }
 
 }
