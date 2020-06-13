@@ -67,16 +67,22 @@ public class MenuPrincipal extends AppCompatActivity {
         listCategoria.add("");
         listCategoria.add("");
 
+        listprimerJuego.add("Nueva Apuesta");
         listprimerJuego.add("Apuestas Disponibles");
 
+        listsegundoJuego.add("Nueva Apuesta");
         listsegundoJuego.add("Apuestas Disponibles");
 
+        listtercerJuego.add("Nueva Apuesta");
         listtercerJuego.add("Apuestas Disponibles");
 
+        listcuartoJuego.add("Nueva Apuesta");
         listcuartoJuego.add("Apuestas Disponibles");
 
+        listquintoJuego.add("Nueva Apuesta");
         listquintoJuego.add("Apuestas Disponibles");
 
+        listsextoJuego.add("Nueva Apuesta");
         listsextoJuego.add("Apuestas Disponibles");
 
         mapChild.put(listCategoria.get(0), listprimerJuego);
