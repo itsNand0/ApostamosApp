@@ -1,14 +1,12 @@
 package com.example.apostamos;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -62,7 +60,7 @@ public class EsplistView extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String tituloCategoria = (String)getGroup(groupPosition);
-        convertView = LayoutInflater.from(context).inflate(R.layout.juegos_group,null);
+        convertView = LayoutInflater.from(context).inflate(R.layout.list_grup,null);
         TextView tvGroup = (TextView ) convertView.findViewById(R.id.tvGroup);
         tvGroup.setText(tituloCategoria);
         return convertView;
@@ -71,7 +69,7 @@ public class EsplistView extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         String item = (String) getChild(groupPosition,childPosition);
-        convertView = LayoutInflater.from(context).inflate(R.layout.opciones_child,null);
+        convertView = LayoutInflater.from(context).inflate(R.layout.list_child,null);
         TextView tvChild = (TextView) convertView.findViewById(R.id.tvChild);
         tvChild.setText(item);
         return convertView;

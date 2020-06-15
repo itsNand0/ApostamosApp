@@ -27,7 +27,7 @@ public class AdministradorUsuario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == R.id.todos){
-            Intent i = new Intent(this, ListaUsuarios.class);
+            Intent i = new Intent(this, ListaUsuarioPrueba.class);
             //i.putExtra("usuarios", );
             startActivity(i);
         }
@@ -93,7 +93,8 @@ public class AdministradorUsuario extends AppCompatActivity {
         BDdeUsuarios admin = new BDdeUsuarios(this,"administrador",null,1);
         SQLiteDatabase bd = admin.getWritableDatabase();
         String ced = et_cedula.getText().toString();
-        int cant = bd.delete("usuario", "cedula="+ced,null);
+        String usu = et_usuario.getText().toString();
+        int cantUno = bd.delete("usuario", "cedula="+ced,null);
         bd.close();
         et_nombre.setText("");
         et_apellido.setText("");
@@ -101,12 +102,13 @@ public class AdministradorUsuario extends AppCompatActivity {
         et_correo.setText("");
         et_usuario.setText("");
         et_contraseña.setText("");
-        if(cant==1){
+        if(cantUno==1){
             Toast.makeText(this,"Usuario eliminado",Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this,"Usuario inexistente",Toast.LENGTH_LONG).show();
         }
     }
+
 
     public void modificar(View view){
         BDdeUsuarios admin = new BDdeUsuarios(this,"administrador",null,1);

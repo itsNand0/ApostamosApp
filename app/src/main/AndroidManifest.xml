@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".ListaUsuarios"></activity>
+        <activity android:name=".ListaUsuarioPrueba"></activity>
+        <activity android:name=".ListaUsuarios" />
         <activity android:name=".NuevaApuesta" />
         <activity
             android:name=".MenuPrincipal"
