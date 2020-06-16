@@ -38,18 +38,18 @@ public class ListaUsuarios extends AppCompatActivity {
         BDdeUsuarios admin = new BDdeUsuarios(this,"administrador",null,1);
         SQLiteDatabase bd = admin.getWritableDatabase();
 
-        ArrayList<String> groupUsuario = new ArrayList<>();
+        /*ArrayList<String> groupUsuario = new ArrayList<>();
         Cursor fila = bd.rawQuery("select cedula from usuario",null);
         if (fila.moveToFirst()){
             do{
                 groupUsuario.add(fila.getString(0));
             }while (fila.moveToNext());
-        }
-        listUsuario.add("ci: " + groupUsuario);
+        }*/
 
+        listUsuario.add("Usuarios");
 
         ArrayList<String> childUsuario = new ArrayList<>();
-        Cursor childFila = bd.rawQuery("select nombre,apellido,telefono,correo,usuario,contraseña from usuario",null);
+        Cursor childFila = bd.rawQuery("select cedula,nombre,apellido,telefono,correo,usuario,contraseña from usuario",null);
         if (childFila.moveToFirst()){
             do{
                 childUsuario.add(childFila.getString(0));
@@ -58,6 +58,9 @@ public class ListaUsuarios extends AppCompatActivity {
                 childUsuario.add(childFila.getString(3));
                 childUsuario.add(childFila.getString(4));
                 childUsuario.add(childFila.getString(5));
+                childUsuario.add(childFila.getString(6));
+                childUsuario.add("Siguiente Usuario");
+                childUsuario.add("");
             }while (childFila.moveToNext());
         }
 

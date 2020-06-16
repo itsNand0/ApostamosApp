@@ -25,7 +25,8 @@
             android:layout_marginRight="10dp"
             android:background="@color/colorCeleste"
             android:padding="10dp"
-            android:textColor="@color/colorGhostWhite" />
+            android:textColor="@color/colorGhostWhite"
+            android:textSize="24sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
