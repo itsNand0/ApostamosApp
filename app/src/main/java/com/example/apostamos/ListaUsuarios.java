@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,38 +16,56 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListaUsuarios extends AppCompatActivity {
-    private ListView lv_usuario;
-    private ArrayList<String> listusuario;
-    private String nombre,cedula;
+    private ExpandableListView expanded_listaUsu;
+    private EsplistView adapter;
+    private ArrayList<String> listUsuario;
+    private Map<String, ArrayList<String>> mapChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_usuarios);
+        setContentView(R.layout.activity_lista_usuario_prueba);
 
-        lv_usuario = (ListView)findViewById(R.id.lv_usuario);
-        listusuario = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listusuario);
-        lv_usuario.setAdapter(adapter);
-        listaUsuario();
-        }
+        expanded_listaUsu = (ExpandableListView) findViewById(R.id.expanded_listaUsu);
+        listUsuario = new ArrayList<>();
+        mapChild = new HashMap<>();
+        cargarUsuario();
 
-    private void listaUsuario(){
+    }
+
+    private void cargarUsuario(){
+
         BDdeUsuarios admin = new BDdeUsuarios(this,"administrador",null,1);
         SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor fila = bd.rawQuery("select * from usuario",null);
+
+        ArrayList<String> groupUsuario = new ArrayList<>();
+        Cursor fila = bd.rawQuery("select cedula from usuario",null);
         if (fila.moveToFirst()){
             do{
-              listusuario.add(fila.getString(0));
-              listusuario.add(fila.getString(1));
-              listusuario.add(fila.getString(2));
-              listusuario.add(fila.getString(3));
-              listusuario.add(fila.getString(4));
-              listusuario.add(fila.getString(5));
-              listusuario.add(fila.getString(6));
-              listusuario.add("Siguiente Usuario");
+                groupUsuario.add(fila.getString(0));
             }while (fila.moveToNext());
         }
+        listUsuario.add("ci: " + groupUsuario);
+
+
+        ArrayList<String> childUsuario = new ArrayList<>();
+        Cursor childFila = bd.rawQuery("select nombre,apellido,telefono,correo,usuario,contraseña from usuario",null);
+        if (childFila.moveToFirst()){
+            do{
+                childUsuario.add(childFila.getString(0));
+                childUsuario.add(childFila.getString(1));
+                childUsuario.add(childFila.getString(2));
+                childUsuario.add(childFila.getString(3));
+                childUsuario.add(childFila.getString(4));
+                childUsuario.add(childFila.getString(5));
+            }while (childFila.moveToNext());
+        }
+
+
+        mapChild.put(listUsuario.get(0), childUsuario);
+
+        adapter = new EsplistView(this, listUsuario, mapChild);
+        expanded_listaUsu.setAdapter(adapter);
     }
 
 }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,7 @@ public class AdministradorUsuario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id == R.id.todos){
-            Intent i = new Intent(this, ListaUsuarioPrueba.class);
+            Intent i = new Intent(this, ListaUsuarios.class);
             //i.putExtra("usuarios", );
             startActivity(i);
         }
@@ -96,6 +95,7 @@ public class AdministradorUsuario extends AppCompatActivity {
         String usu = et_usuario.getText().toString();
         int cantUno = bd.delete("usuario", "cedula="+ced,null);
         bd.close();
+        et_cedula.setText("");
         et_nombre.setText("");
         et_apellido.setText("");
         et_telefono.setText("");
