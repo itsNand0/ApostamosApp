@@ -5,7 +5,7 @@
     tools:context=".MenuPrincipal">
 
 
-    <item android:title="Configuracion"
-          android:id="@+id/configuracion"/>
+    <item android:title="Cerrar Sesion"
+          android:id="@+id/cerrar_sesion"/>
 
 </menu>

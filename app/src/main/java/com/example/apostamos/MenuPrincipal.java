@@ -36,13 +36,6 @@ public class MenuPrincipal extends AppCompatActivity {
         lv_clubes = (ListView)findViewById(R.id.lv_clubes);
         lv_clubes.setAdapter(new MPadaptador(this,datos,img_club));
 
-        tv_usuario = (TextView)findViewById(R.id.tv_usuario);
-        Bundle b = getIntent().getExtras();
-        String dato = b.getString("usuario");
-        tv_usuario.setText("Hola " + dato + ", Bienvenido");
-
-
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu mimenu){

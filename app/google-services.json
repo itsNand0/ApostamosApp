@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "615103772313",
+    "firebase_url": "https://apostamos-3b098.firebaseio.com",
+    "project_id": "apostamos-3b098",
+    "storage_bucket": "apostamos-3b098.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615103772313:android:3b2352bde57ee6d0de6a08",
+        "android_client_info": {
+          "package_name": "com.example.apostamos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615103772313-c0v5a4raidgit5nu8u44t4f4p6s8idlf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBELidGuU_uHCGJ3ljlBAMIgbPxdv6JpKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615103772313-c0v5a4raidgit5nu8u44t4f4p6s8idlf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
