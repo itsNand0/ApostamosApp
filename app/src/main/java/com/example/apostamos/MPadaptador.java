@@ -13,10 +13,10 @@ public class MPadaptador extends BaseAdapter {
     private static LayoutInflater inflater = null;
 
     Context context;
-    String[][] datos;
+    String[] datos;
     int[] img_club;
 
-    public MPadaptador (Context context,String[][] datos,int[] imagenes ){
+    public MPadaptador (Context context, String[] datos, int[] imagenes ){
         this.context = context;
         this.datos = datos;
         this.img_club = imagenes;
@@ -46,10 +46,10 @@ public class MPadaptador extends BaseAdapter {
         TextView club2 = (TextView) vista.findViewById(R.id.tv_club2);
         ImageView imagen = (ImageView) vista.findViewById(R.id.iv_club);
         ImageView imagen2 = (ImageView) vista.findViewById(R.id.iv_club2);
-        club.setText(datos[i][0]);
-        club2.setText(datos[i][0]);
-        imagen.setImageResource(img_club[i]);
-        imagen2.setImageResource(img_club[i]);
+        club.setText(datos[7]);
+        club2.setText(datos[1]);
+        imagen.setImageResource(img_club[7]);
+        imagen2.setImageResource(img_club[1]);
 
         return vista;
     }
