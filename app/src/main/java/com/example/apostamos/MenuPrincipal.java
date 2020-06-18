@@ -1,12 +1,17 @@
 package com.example.apostamos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -41,5 +46,17 @@ public class MenuPrincipal extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu mimenu){
         getMenuInflater().inflate(R.menu.menuprincipal, mimenu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.cerrar_sesion){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseAuth.getInstance().signOut();
+
+            Intent i = new Intent(MenuPrincipal.this,MainActivity.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
