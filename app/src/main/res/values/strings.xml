@@ -15,4 +15,10 @@
     <string name="btn_consultar">Consultar</string>
     <string name="btn_borrar">Borrar</string>
     <string name="btn_modificar">Modificar</string>
+
+    <string-array name="fechas">
+        <item>17 de Julio</item>
+        <item>19 de Julio</item>
+    </string-array>
+
 </resources>
