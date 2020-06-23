@@ -10,10 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".ActivityPrueba"></activity>
-        <activity android:name=".NuevaApuesta" />
+        <activity android:name=".NuevaApuesta" >
+        </activity>
         <activity
             android:name=".MenuPrincipal"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" >
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

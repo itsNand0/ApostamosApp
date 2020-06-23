@@ -11,10 +11,13 @@
     <string name="txt_registrar_usuario">Usuario</string>
     <string name="txt_registrar_contraseña">Contraseña</string>
     <string name="btn_ingresar">Ingresar</string>
-    <string name="btn_registrar">Registrar</string>
+    <string name="btn_apostar">Apostar</string>
     <string name="btn_consultar">Consultar</string>
     <string name="btn_borrar">Borrar</string>
     <string name="btn_modificar">Modificar</string>
+    <string name="et_apuesta">Monto</string>
+    <string name="tv_apuesta">Ingrese su apuesta:</string>
+
 
     <string-array name="fechas">
         <item>17 de Julio</item>

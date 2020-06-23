@@ -29,12 +29,17 @@ public class MenuPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
 
         lv_clubes = (ListView)findViewById(R.id.lv_clubes);
-        //lv_clubes.setAdapter(new MPadaptador(this,datos,img_club));
-        sp_fechas = (Spinner)findViewById(R.id.sp_fechas);
+        lv_clubes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MenuPrincipal.this, NuevaApuesta.class);
+                startActivity(i);
+            }
+        });
 
+        sp_fechas = (Spinner)findViewById(R.id.sp_fechas);
         ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,R.array.fechas,android.R.layout.simple_expandable_list_item_1);
         sp_fechas.setAdapter(spinnerAdapter);
-
         sp_fechas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
