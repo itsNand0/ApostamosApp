@@ -22,7 +22,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private ListView lv_clubes;
     private Spinner sp_fechas;
     private MPadaptador mPadaptador;
-    String olimpia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
