@@ -47,6 +47,6 @@ public class NAadaptador extends BaseAdapter {
         imgClub.setImageResource(listaApuestas.getImgClub());
         apuesta.setText(listaApuestas.getApuesta());
 
-        return null;
+        return vista;
     }
 }

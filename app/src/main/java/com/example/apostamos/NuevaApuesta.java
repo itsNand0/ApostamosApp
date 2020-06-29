@@ -30,6 +30,7 @@ public class NuevaApuesta extends AppCompatActivity {
     private EditText et_monto;
     private ListView lv_apuestas;
     private NAadaptador nAadaptador;
+    private ArrayList<ListaApuestas> listas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +39,29 @@ public class NuevaApuesta extends AppCompatActivity {
         et_monto = findViewById(R.id.et_monto);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        enviarDatosdelFirebase();
+        nAadaptador = new NAadaptador(this,listas);
+        lv_apuestas.setAdapter(nAadaptador);
 
+        mDatabase.child("Apuestas").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    String nombre = snapshot.child("usuario").getValue().toString();
+                    String apuesta = snapshot.child("monto").getValue().toString();
+                    listas.add(new ListaApuestas(nombre,R.drawable.cerro_porteno,apuesta));
+                    nAadaptador.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
+
 
     public void apostar(View view){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,42 +82,5 @@ public class NuevaApuesta extends AppCompatActivity {
             Toast.makeText(this,"Debe iniciar sesion",Toast.LENGTH_SHORT).show();
         }
     }
-
-
-    private void enviarDatosdelFirebase(){
-        final ArrayList<ListaApuestas> arrayApuesta = new ArrayList<>();
-        mDatabase.child("Apuestas").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (final DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        mDatabase.child("Apuestas").child(snapshot.getKey()).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                String apostador = snapshot.child("usuario").getValue().toString();
-                                String apuesta = snapshot.child("monto").getValue().toString();
-                                arrayApuesta.add(new ListaApuestas(apostador,R.drawable.cerro_porteno,apuesta));
-                                nAadaptador = new NAadaptador(NuevaApuesta.this,arrayApuesta);
-                                lv_apuestas.setAdapter(nAadaptador);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
 
 }

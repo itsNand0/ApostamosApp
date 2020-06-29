@@ -11,6 +11,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".ActivityPrueba"></activity>
         <activity android:name=".NuevaApuesta" >
+
         </activity>
         <activity
             android:name=".MenuPrincipal"
