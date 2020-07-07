@@ -1,6 +1,8 @@
 package com.example.apostamos;
 
-public class ListadePartidos {
+import java.io.Serializable;
+
+public class ListadePartidos implements Serializable {
     private int imagen1;
     private String club1;
     private int imgen1;

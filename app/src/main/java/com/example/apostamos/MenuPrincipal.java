@@ -14,6 +14,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.ls.LSException;
+
 import java.util.ArrayList;
 
 
@@ -21,45 +24,53 @@ public class MenuPrincipal extends AppCompatActivity {
     private ListView lv_clubes;
     private Spinner sp_fechas;
     private MPadaptador mPadaptador;
+    private ArrayList<ListadePartidos> listadePartidos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        listadePartidos = fechaDiecisiete();
 
-        lv_clubes = (ListView)findViewById(R.id.lv_clubes);
-        lv_clubes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lv_clubes = findViewById(R.id.lv_clubes);
+            lv_clubes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionPrimerPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }else if (position == 1){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionSegundoPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }else if (position == 2){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionTercerPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }else if (position == 3){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionCuartoPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }else if (position == 4){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionQuintoPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }else if (position == 5){
                     Intent i = new Intent(MenuPrincipal.this, SeleccionSextoPartido.class);
+                    i.putExtra("partidoSeleccionado",listadePartidos.get(position));
                     startActivity(i);
                 }
             }
         });
 
-        sp_fechas = (Spinner)findViewById(R.id.sp_fechas);
+        sp_fechas = findViewById(R.id.sp_fechas);
         ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,R.array.fechas,android.R.layout.simple_expandable_list_item_1);
         sp_fechas.setAdapter(spinnerAdapter);
         sp_fechas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getItemAtPosition(position).equals("17 de Julio")){
-                    mPadaptador = new MPadaptador(MenuPrincipal.this, fechaDiecisiete());
+                    mPadaptador = new MPadaptador(MenuPrincipal.this, listadePartidos);
                     lv_clubes.setAdapter(mPadaptador);
                 }
                 if (parent.getItemAtPosition(position).equals("19 de Julio")){

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class SeleccionSextoPartido extends AppCompatActivity {
     private ListView lv_apuestas;
     private NAadaptador nAadaptador;
     private ArrayList<ListaApuestas> listas = new ArrayList<>();
+    private ImageView club1, club2;
+    private ListadePartidos Item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,12 @@ public class SeleccionSextoPartido extends AppCompatActivity {
         lv_apuestas = findViewById(R.id.lv_apuestas);
         et_monto = findViewById(R.id.et_monto6);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        club1 = findViewById(R.id.imageView11);
+        club2 = findViewById(R.id.imageView12);
+        Item = (ListadePartidos) getIntent().getSerializableExtra("partidoSeleccionado");
+
+        club1.setImageResource(Item.getImagen1());
+        club2.setImageResource(Item.getImgen1());
 
         nAadaptador = new NAadaptador(this,listas);
         lv_apuestas.setAdapter(nAadaptador);
