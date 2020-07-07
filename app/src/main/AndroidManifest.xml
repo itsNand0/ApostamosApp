@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".ActivityPrueba"></activity>
-        <activity android:name=".NuevaApuesta" >
-
-        </activity>
+        <activity android:name=".SeleccionSextoPartido"></activity>
+        <activity android:name=".SeleccionQuintoPartido" />
+        <activity android:name=".SeleccionCuartoPartido" />
+        <activity android:name=".SeleccionTercerPartido" />
+        <activity android:name=".SeleccionSegundoPartido" />
+        <activity android:name=".ActivityPrueba" />
+        <activity android:name=".SeleccionPrimerPartido" />
         <activity
             android:name=".MenuPrincipal"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

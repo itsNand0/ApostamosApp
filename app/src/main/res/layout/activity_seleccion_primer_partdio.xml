@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorVerde"
-    tools:context=".NuevaApuesta">
+    tools:context=".SeleccionPrimerPartido">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -135,11 +135,13 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:text="Apuestas disponibles para este partido"
         android:textAlignment="center"
         android:textColor="@color/colorGhostWhite"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lv_apuestas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

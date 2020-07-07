@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
@@ -31,8 +30,25 @@ public class MenuPrincipal extends AppCompatActivity {
         lv_clubes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(MenuPrincipal.this, NuevaApuesta.class);
-                startActivity(i);
+                if(position == 0){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionPrimerPartido.class);
+                    startActivity(i);
+                }else if (position == 1){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionSegundoPartido.class);
+                    startActivity(i);
+                }else if (position == 2){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionTercerPartido.class);
+                    startActivity(i);
+                }else if (position == 3){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionCuartoPartido.class);
+                    startActivity(i);
+                }else if (position == 4){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionQuintoPartido.class);
+                    startActivity(i);
+                }else if (position == 5){
+                    Intent i = new Intent(MenuPrincipal.this, SeleccionSextoPartido.class);
+                    startActivity(i);
+                }
             }
         });
 
