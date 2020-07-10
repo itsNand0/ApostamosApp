@@ -29,28 +29,25 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private EditText et_monto;
     private RadioButton rb_club1,rb_club2;
-    private ListView lv_apuestas;
-    private ListadePartidos Item;
-    private ImageView club1, club2;
     private NAadaptador nAadaptador;
     private ArrayList<ListaApuestas> listas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_primer_partdio);
-        lv_apuestas = findViewById(R.id.lv_apuestas);
+        ListView lv_apuestas = findViewById(R.id.lv_apuestas);
         et_monto = findViewById(R.id.et_monto);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        club1 = findViewById(R.id.imageView);
-        club2 = findViewById(R.id.imageView3);
+        ImageView club1 = findViewById(R.id.imageView);
+        ImageView club2 = findViewById(R.id.imageView3);
         rb_club1 = findViewById(R.id.radioButton);
         rb_club2 = findViewById(R.id.radioButton2);
 
-        Item = (ListadePartidos) getIntent().getSerializableExtra("partidoSeleccionado");
-        club1.setImageResource(Item.getImagen1());
-        club2.setImageResource(Item.getImgen1());
-        rb_club1.setText(Item.getClub1());
-        rb_club2.setText(Item.getClub2());
+        ListadePartidos item = (ListadePartidos) getIntent().getSerializableExtra("partidoSeleccionado");
+        club1.setImageResource(item.getImagen1());
+        club2.setImageResource(item.getImgen1());
+        rb_club1.setText(item.getClub1());
+        rb_club2.setText(item.getClub2());
 
         nAadaptador = new NAadaptador(this,listas);
         lv_apuestas.setAdapter(nAadaptador);
@@ -61,8 +58,9 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String nombre = snapshot.child("usuario").getValue().toString();
                     String apuesta = snapshot.child("monto").getValue().toString();
-                    listas.add(new ListaApuestas(nombre,R.drawable.cerro_porteno,apuesta));
-                    nAadaptador.notifyDataSetChanged();
+                    String equipo = snapshot.child("club").getValue().toString();
+                        listas.add(new ListaApuestas(nombre,equipo,apuesta));
+                        nAadaptador.notifyDataSetChanged();
                 }
 
             }

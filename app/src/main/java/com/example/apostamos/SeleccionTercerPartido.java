@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,24 +26,26 @@ import java.util.Map;
 public class SeleccionTercerPartido extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private EditText et_monto;
-    private ListView lv_apuestas;
+    private RadioButton rb_club1,rb_club2;
     private NAadaptador nAadaptador;
     private ArrayList<ListaApuestas> listas = new ArrayList<>();
-    private ImageView club1, club2;
-    private ListadePartidos Item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_tercer_partido);
-        lv_apuestas = findViewById(R.id.lv_apuestas);
+        ListView lv_apuestas = findViewById(R.id.lv_apuestas);
         et_monto = findViewById(R.id.et_monto3);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        club1 = findViewById(R.id.imageView6);
-        club2 = findViewById(R.id.imageView5);
-        Item = (ListadePartidos) getIntent().getSerializableExtra("partidoSeleccionado");
+        ImageView club1 = findViewById(R.id.imageView6);
+        ImageView club2 = findViewById(R.id.imageView5);
+        rb_club1 = findViewById(R.id.radioButton5);
+        rb_club2 = findViewById(R.id.radioButton6);
 
-        club1.setImageResource(Item.getImagen1());
-        club2.setImageResource(Item.getImgen1());
+        ListadePartidos item = (ListadePartidos) getIntent().getSerializableExtra("partidoSeleccionado");
+        club1.setImageResource(item.getImagen1());
+        club2.setImageResource(item.getImgen1());
+        rb_club1.setText(item.getClub1());
+        rb_club2.setText(item.getClub2());
 
         nAadaptador = new NAadaptador(this,listas);
         lv_apuestas.setAdapter(nAadaptador);
@@ -53,7 +56,8 @@ public class SeleccionTercerPartido extends AppCompatActivity {
                 for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String nombre = snapshot.child("usuario").getValue().toString();
                     String apuesta = snapshot.child("monto").getValue().toString();
-                    listas.add(new ListaApuestas(nombre,R.drawable.cerro_porteno,apuesta));
+                    String equipo = snapshot.child("club").getValue().toString();
+                    listas.add(new ListaApuestas(nombre,equipo,apuesta));
                     nAadaptador.notifyDataSetChanged();
                 }
 
@@ -73,14 +77,31 @@ public class SeleccionTercerPartido extends AppCompatActivity {
             String email =  user.getEmail();
             String name = user.getDisplayName();
             String monto = et_monto.getText().toString();
+            String caso1 = rb_club1.getText().toString();
+            String caso2 = rb_club2.getText().toString();
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("usuario", name);
-            map.put("email", email);
-            map.put("monto", monto);
-            mDatabase.child("TercerPartido").push().setValue(map);
-            Toast.makeText(this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();
-            et_monto.setText("");
+            if (rb_club1.isChecked()){
+                Map<String, Object> map = new HashMap<>();
+                map.put("usuario", name);
+                map.put("email", email);
+                map.put("monto", monto);
+                map.put("club", caso1);
+                mDatabase.child("TercerPartido").push().setValue(map);
+                Toast.makeText(this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();
+                et_monto.setText("");
+            }else
+            if(rb_club2.isChecked()){
+                Map<String, Object> map = new HashMap<>();
+                map.put("usuario", name);
+                map.put("email", email);
+                map.put("monto", monto);
+                map.put("club", caso2);
+                mDatabase.child("TercerPartido").push().setValue(map);
+                Toast.makeText(this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();
+                et_monto.setText("");
+            }else {
+                Toast.makeText(this,"Seleccione un equipo",Toast.LENGTH_SHORT).show();
+            }
         }else {
             Toast.makeText(this,"Debe iniciar sesion",Toast.LENGTH_SHORT).show();
         }

@@ -1,18 +1,14 @@
 package com.example.apostamos;
 
-import android.app.LauncherActivity;
-import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class MPadaptador extends BaseAdapter {
 
@@ -26,7 +22,6 @@ public class MPadaptador extends BaseAdapter {
 
     @Override
     public int getCount() {
-
         return juegos.size();
     }
 
@@ -47,7 +42,7 @@ public class MPadaptador extends BaseAdapter {
 
         View vista = LayoutInflater.from(context).inflate(R.layout.elementos_listview_menuprincipal,null);
         ImageView imagen = (ImageView) vista.findViewById(R.id.iv_club);
-        TextView club = (TextView) vista.findViewById(R.id.tv_club);
+        TextView club = (TextView) vista.findViewById(R.id.tv_apuesta);
         TextView club2 = (TextView) vista.findViewById(R.id.tv_club2);
         ImageView imagen2 = (ImageView) vista.findViewById(R.id.iv_club2);
 

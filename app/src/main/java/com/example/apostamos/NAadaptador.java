@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,11 +39,11 @@ public class NAadaptador extends BaseAdapter {
 
         View vista = LayoutInflater.from(context).inflate(R.layout.elementos_listview_nuevaapuesta,null);
         TextView apostador = vista.findViewById(R.id.tvUsuario);
-        ImageView imgClub = vista.findViewById(R.id.imgClub);
-        TextView apuesta = vista.findViewById(R.id.tvApuesta);
+        TextView apuesta = vista.findViewById(R.id.tv_apuesta);
+        TextView club = vista.findViewById(R.id.tv_club);
 
         apostador.setText(listaApuestas.getApostador());
-        imgClub.setImageResource(listaApuestas.getImgClub());
+        club.setText(listaApuestas.getClub());
         apuesta.setText(listaApuestas.getApuesta());
 
         return vista;
