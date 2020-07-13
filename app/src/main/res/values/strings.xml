@@ -1,22 +1,15 @@
 <resources>
     <string name="app_name">Apostamos</string>
     <string name="vt_usuarios">Usuarios</string>
-    <string name="txt_main_usuario">Usuario</string>
-    <string name="txt_main_pass">Contraseña</string>
-    <string name="txt_registrar_cedula">CI</string>
-    <string name="txt_registrar_nombre">Nombre</string>
-    <string name="txt_registrar_apellido">Apellido</string>
-    <string name="txt_registrar_telefono">Telefono</string>
-    <string name="txt_registrar_gmail">Correo</string>
-    <string name="txt_registrar_usuario">Usuario</string>
-    <string name="txt_registrar_contraseña">Contraseña</string>
     <string name="btn_ingresar">Ingresar</string>
     <string name="btn_apostar">Apostar</string>
-    <string name="btn_consultar">Consultar</string>
-    <string name="btn_borrar">Borrar</string>
-    <string name="btn_modificar">Modificar</string>
     <string name="et_apuesta">Monto</string>
     <string name="tv_apuesta">Ingrese su apuesta:</string>
+    <string name="sus_datos">Sus Datos</string>
+    <string name="celular">Celular:</string>
+    <string name="ci">CI:</string>
+    <string name="email">Email:</string>
+    <string name="nombre">Nombre:</string>
 
 
     <string-array name="fechas">

@@ -106,7 +106,7 @@ public class MenuPrincipal extends AppCompatActivity {
         return true;
     }
 
-    //logOut
+    // Funcion para la barra de menu.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -116,7 +116,11 @@ public class MenuPrincipal extends AppCompatActivity {
 
             Intent i = new Intent(MenuPrincipal.this,MainActivity.class);
             startActivity(i);
-        }
+        }else
+            if(id == R.id.mi_perfil){
+                Intent i = new Intent(this,UsuarioPerfil.class);
+                startActivity(i);
+            }
         return super.onOptionsItemSelected(item);
     }
 }
