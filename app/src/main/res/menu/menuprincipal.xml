@@ -4,8 +4,8 @@
    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MenuPrincipal">
 
-    <item android:title=" Mi Perfil"
-        android:id="@+id/mi_perfil" />
+    <item android:title="Mi Cuenta"
+        android:id="@+id/mi_cuenta" />
     <item android:title="Cerrar Sesion"
           android:id="@+id/cerrar_sesion" />
 

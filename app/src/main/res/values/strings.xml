@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Apostamos</string>
-    <string name="vt_usuarios">Usuarios</string>
-    <string name="btn_ingresar">Ingresar</string>
     <string name="btn_apostar">Apostar</string>
+    <string name="btn_cargar_Saldo">Cargar</string>
     <string name="et_apuesta">Monto</string>
     <string name="tv_apuesta">Ingrese su apuesta:</string>
     <string name="sus_datos">Sus Datos</string>
@@ -10,6 +9,8 @@
     <string name="ci">CI:</string>
     <string name="email">Email:</string>
     <string name="nombre">Nombre:</string>
+    <string name="saldo">Saldo:</string>
+
 
 
     <string-array name="fechas">
