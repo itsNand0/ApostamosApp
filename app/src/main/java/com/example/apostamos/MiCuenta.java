@@ -23,7 +23,6 @@ public class MiCuenta extends AppCompatActivity {
         btn_cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String numero = "992474340";
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, "Buenas, quisiera cargar mi saldo. \n Usuario: \n Ci: \n Monto: ");
