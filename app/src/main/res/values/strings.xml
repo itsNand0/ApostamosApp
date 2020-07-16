@@ -10,7 +10,7 @@
     <string name="email">Email:</string>
     <string name="nombre">Nombre:</string>
     <string name="saldo">Saldo:</string>
-
+    <string name="juegos_disponibles">Juegos Disponibles</string>
 
 
     <string-array name="fechas">

@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 
 public class MiCuenta extends AppCompatActivity {
     private TextView tv_saldo;
@@ -16,7 +16,6 @@ public class MiCuenta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_cuenta);
-
         tv_saldo = findViewById(R.id.tv_saldo);
 
         btn_cargar = findViewById(R.id.btn_cargar_saldo);
@@ -29,7 +28,6 @@ public class MiCuenta extends AppCompatActivity {
                 sendIntent.setType("text/plain");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(sendIntent);
-
             }
         });
     }

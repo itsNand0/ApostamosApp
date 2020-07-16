@@ -23,6 +23,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MAINACTIVITY";
@@ -30,22 +35,34 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //elementos para que funcione el LogIn con google
+        //para que funcione el LogIn con google
         mAuth= FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(firebaseAuth.getCurrentUser()!=null){
+                    //para guardar datos de usuarios nuevos
+                    String uid = user.getUid();
+                    String email = user.getEmail();
+                    String usuario = user.getDisplayName();
+                    int saldo = 0;
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("email", email);
+                    map.put("usuario", usuario);
+                    map.put("saldo", saldo);
+                    mDatabase.child("Usuarios").child(uid).setValue(map);
                     Intent i = new Intent(MainActivity.this,MenuPrincipal.class);
                     startActivity(i);
                 }
-
             }
         };
 

@@ -77,8 +77,7 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
     public void apostar(View view){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
-            String uid = user.getUid();
-            String email =  user.getEmail();
+            String email = user.getEmail();
             String name = user.getDisplayName();
             String monto = et_monto.getText().toString();
             String caso1 = rb_club1.getText().toString();
