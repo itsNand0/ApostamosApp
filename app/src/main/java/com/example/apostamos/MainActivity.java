@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     String uid = user.getUid();
                     String email = user.getEmail();
                     String usuario = user.getDisplayName();
-                    int saldo = 0;
+                    String saldo = "";
                     Map<String, Object> map = new HashMap<>();
                     map.put("email", email);
                     map.put("usuario", usuario);

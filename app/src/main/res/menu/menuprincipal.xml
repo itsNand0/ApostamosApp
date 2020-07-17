@@ -3,10 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MenuPrincipal">
-
-    <item android:title="Mi Cuenta"
-        android:id="@+id/mi_cuenta" />
-    <item android:title="Cerrar Sesion"
-          android:id="@+id/cerrar_sesion" />
-
+    <item android:icon="@drawable/ic_more_"
+        android:title="mas"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/mi_cuenta"
+                android:icon="@drawable/ic_account"
+                android:title="@string/mi_cuenta"
+                />
+            <item
+                android:id="@+id/cerrar_sesion"
+                android:icon="@drawable/ic_close"
+                android:title="@string/cerrar_sesion"
+                />
+            <item
+                android:id="@+id/administrador"
+                android:icon="@drawable/ic_supervised_user"
+                android:title="@string/administrador"
+                />
+        </menu>
+    </item>
 </menu>

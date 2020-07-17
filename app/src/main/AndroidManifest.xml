@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MiCuenta"></activity>
+        <activity android:name=".MenuAdministrador"></activity>
+        <activity android:name=".MiCuenta" />
         <activity android:name=".SeleccionSextoPartido" />
         <activity android:name=".SeleccionQuintoPartido" />
         <activity android:name=".SeleccionCuartoPartido" />

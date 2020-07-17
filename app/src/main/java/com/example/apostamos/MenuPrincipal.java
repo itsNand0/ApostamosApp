@@ -120,6 +120,10 @@ public class MenuPrincipal extends AppCompatActivity {
             if(id == R.id.mi_cuenta){
                 Intent i = new Intent(this,MiCuenta.class);
                 startActivity(i);
+            }else
+            if(id == R.id.administrador){
+                Intent i = new Intent(this,MenuAdministrador.class);
+                startActivity(i);
             }
         return super.onOptionsItemSelected(item);
     }

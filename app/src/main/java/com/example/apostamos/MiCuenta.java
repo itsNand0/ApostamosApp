@@ -24,7 +24,7 @@ public class MiCuenta extends AppCompatActivity {
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Buenas, quisiera cargar mi saldo. \n Usuario: \n Ci: \n Monto: ");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Buenas, quisiera cargar mi saldo. \n Email: \n Monto: ");
                 sendIntent.setType("text/plain");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(sendIntent);
