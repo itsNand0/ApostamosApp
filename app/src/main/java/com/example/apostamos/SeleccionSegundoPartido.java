@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,9 +29,10 @@ import java.util.Map;
 public class SeleccionSegundoPartido extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private EditText et_monto;
-    private RadioButton rb_club1,rb_club2;
+    private RadioButton rb_club1, rb_club2;
     private NAadaptador nAadaptador;
     private ArrayList<ListaApuestas> listas = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,17 +51,17 @@ public class SeleccionSegundoPartido extends AppCompatActivity {
         rb_club1.setText(item.getClub1());
         rb_club2.setText(item.getClub2());
 
-        nAadaptador= new NAadaptador(this,listas);
+        nAadaptador = new NAadaptador(this, listas);
         lv_apuestas.setAdapter(nAadaptador);
 
         mDatabase.child("SegundoPartido").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(final DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String nombre = snapshot.child("usuario").getValue().toString();
                     String apuesta = snapshot.child("monto").getValue().toString();
                     String equipo = snapshot.child("club").getValue().toString();
-                    listas.add(new ListaApuestas(nombre,equipo,apuesta));
+                    listas.add(new ListaApuestas(nombre, equipo, apuesta));
                     nAadaptador.notifyDataSetChanged();
                 }
             }
@@ -71,39 +73,83 @@ public class SeleccionSegundoPartido extends AppCompatActivity {
         });
     }
 
-    public void apostar(View view){
+    public void apostar(View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            String email =  user.getEmail();
-            String name = user.getDisplayName();
-            String monto = et_monto.getText().toString();
-            String caso1 = rb_club1.getText().toString();
-            String caso2 = rb_club2.getText().toString();
+        if (user != null) {
+            String email = user.getEmail();
+            Query query = mDatabase.child("Usuarios").orderByChild("email").equalTo(email);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-            if (rb_club1.isChecked()){
-                Map<String, Object> map = new HashMap<>();
-                map.put("usuario", name);
-                map.put("email", email);
-                map.put("monto", monto);
-                map.put("club", caso1);
-                mDatabase.child("SegundoPartido").push().setValue(map);
-                Toast.makeText(this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();
-                et_monto.setText("");
-            }else
-            if(rb_club2.isChecked()){
-                Map<String, Object> map = new HashMap<>();
-                map.put("usuario", name);
-                map.put("email", email);
-                map.put("monto", monto);
-                map.put("club", caso2);
-                mDatabase.child("SegundoPartido").push().setValue(map);
-                Toast.makeText(this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();
-                et_monto.setText("");
-            }else {
-                Toast.makeText(this,"Seleccione un equipo",Toast.LENGTH_SHORT).show();
-            }
-        }else {
-            Toast.makeText(this,"Debe iniciar sesion",Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String name = user.getDisplayName();
+                        String email = user.getEmail();
+                        String uid = user.getUid();
+                        String caso1 = rb_club1.getText().toString();
+                        String caso2 = rb_club2.getText().toString();
+                        String monto = et_monto.getText().toString();
+                        String saldo = dataSnapshot.child("saldo").getValue().toString();
+                        int saldoint = Integer.parseInt(saldo);
+                        int montoint = Integer.parseInt(monto);
+
+                        if (!monto.isEmpty()) {
+                            if (saldoint >= montoint) {
+                                int resta = saldoint - montoint;
+                                String restaString = String.valueOf(resta);
+
+                                if (rb_club1.isChecked()) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("usuario", name);
+                                    map.put("email", email);
+                                    map.put("monto", monto);
+                                    map.put("club", caso1);
+                                    mDatabase.child("SegundoPartido").push().setValue(map);
+
+                                    Map<String, Object> map2 = new HashMap<>();
+                                    map2.put("usuario", name);
+                                    map2.put("email", email);
+                                    map2.put("saldo", restaString);
+                                    mDatabase.child("Usuarios").child(uid).updateChildren(map2);
+                                    Toast.makeText(SeleccionSegundoPartido.this, "La apuesta esta hecha, Mucha Suerte.", Toast.LENGTH_LONG).show();
+                                    et_monto.setText("");
+                                } else if (rb_club2.isChecked()) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("usuario", name);
+                                    map.put("email", email);
+                                    map.put("monto", monto);
+                                    map.put("club", caso2);
+                                    mDatabase.child("SegundoPartido").push().setValue(map);
+
+                                    Map<String, Object> map2 = new HashMap<>();
+                                    map2.put("usuario", name);
+                                    map2.put("email", email);
+                                    map2.put("saldo", restaString);
+                                    mDatabase.child("Usuarios").child(uid).updateChildren(map2);
+                                    Toast.makeText(SeleccionSegundoPartido.this, "La apuesta esta hecha, Mucha suerte.", Toast.LENGTH_LONG).show();
+                                    et_monto.setText("");
+                                } else {
+                                    Toast.makeText(SeleccionSegundoPartido.this, "Seleccione un equipo", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(SeleccionSegundoPartido.this, "Saldo insuficiente", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SeleccionSegundoPartido.this, "Ingrese un monto a su apuesta", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
+
+        } else {
+            Toast.makeText(SeleccionSegundoPartido.this, "Debe iniciar sesion", Toast.LENGTH_SHORT).show();
         }
     }
 }

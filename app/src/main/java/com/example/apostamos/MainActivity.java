@@ -50,16 +50,6 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(firebaseAuth.getCurrentUser()!=null){
-                    //para guardar datos de usuarios nuevos
-                    String uid = user.getUid();
-                    String email = user.getEmail();
-                    String usuario = user.getDisplayName();
-                    String saldo = "";
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("email", email);
-                    map.put("usuario", usuario);
-                    map.put("saldo", saldo);
-                    mDatabase.child("Usuarios").child(uid).setValue(map);
                     Intent i = new Intent(MainActivity.this,MenuPrincipal.class);
                     startActivity(i);
                 }

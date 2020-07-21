@@ -47,14 +47,22 @@ public class MenuAdministrador extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 String clave = dataSnapshot.getKey();
-                                mDataBase.child(clave).child("saldo").setValue(et_monto.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                String saldo = et_monto.getText().toString();
+                                String gmail = dataSnapshot.child("email").getValue().toString();
+                                String usuario = dataSnapshot.child("usuario").getValue().toString();
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("email", gmail);
+                                map.put("usuario", usuario);
+                                map.put("saldo", saldo);
+                                mDataBase.child(clave).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(MenuAdministrador.this,"Carga Realizada",Toast.LENGTH_LONG).show();
-                                        et_email.setText("");
+                                        Toast.makeText(MenuAdministrador.this, "Carga realizada",Toast.LENGTH_LONG).show();
                                         et_monto.setText("");
+                                        et_email.setText("");
                                     }
                                 });
+
                             }
                         }
 
