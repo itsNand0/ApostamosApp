@@ -62,13 +62,12 @@ public class MenuAdministrador extends AppCompatActivity {
                                         et_email.setText("");
                                     }
                                 });
-
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
+                            Toast.makeText(MenuAdministrador.this,"email no registrado",Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{

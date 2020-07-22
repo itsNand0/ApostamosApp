@@ -93,7 +93,6 @@ public class SeleccionCuartoPartido extends AppCompatActivity {
                         int saldoint = Integer.parseInt(saldo);
                         int montoint = Integer.parseInt(monto);
 
-                        if(!monto.isEmpty()){
                             if (saldoint >= montoint) {
                                 int resta = saldoint - montoint;
                                 String restaString = String.valueOf(resta);
@@ -120,7 +119,7 @@ public class SeleccionCuartoPartido extends AppCompatActivity {
                                     map.put("email", email);
                                     map.put("monto", monto);
                                     map.put("club", caso2);
-                                    mDatabase.child("CuartoPartido ").push().setValue(map);
+                                    mDatabase.child("CuartoPartido").push().setValue(map);
 
                                     Map<String, Object> map2 = new HashMap<>();
                                     map2.put("usuario", name);
@@ -135,11 +134,8 @@ public class SeleccionCuartoPartido extends AppCompatActivity {
                             }else {
                                 Toast.makeText(SeleccionCuartoPartido.this,"Saldo insuficiente",Toast.LENGTH_SHORT).show();
                             }
-                        }else {
-                            Toast.makeText(SeleccionCuartoPartido.this,"Ingrese un monto a su apuesta",Toast.LENGTH_LONG).show();
                         }
                     }
-                }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {

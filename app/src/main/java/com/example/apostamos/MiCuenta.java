@@ -23,11 +23,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MiCuenta extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private TextView tv_saldo,tv_nombre;
     private Button btn_cargar,btn_retirar;
+    private ImageView img_foto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,13 @@ public class MiCuenta extends AppCompatActivity {
         tv_nombre = findViewById(R.id.tv_nombre);
         mDataBase = FirebaseDatabase.getInstance().getReference("Usuarios");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        img_foto = findViewById(R.id.img_foto);
+        Picasso.with(this).
+                load(user.getPhotoUrl()).
+                fit().
+                into(img_foto);
+        tv_nombre.setText(user.getDisplayName());
 
         String email = user.getEmail();
         Query query = mDataBase.orderByChild("email").equalTo(email);
@@ -58,6 +69,14 @@ public class MiCuenta extends AppCompatActivity {
         btn_cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*String uid = user.getUid();
+                String gmail = user.getEmail();
+                String usuario = user.getDisplayName();
+                Map<String, Object> map = new HashMap<>();
+                map.put("email", gmail);
+                map.put("usuario", usuario);
+                mDataBase.child(uid).setValue(map);*/
+
                 String emailcargar = user.getEmail();
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
