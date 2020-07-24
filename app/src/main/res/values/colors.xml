@@ -8,5 +8,7 @@
     <color name="colorCrimson">#DC143C</color>
     <color name="colorCeleste">#1493C5</color>
     <color name="colorVerdeClaro">#00cc33</color>
+    <color name="colorVerdeValidar">#166120</color>
+    <color name="colorRojoEliminar">#AA0000</color>
 
 </resources>

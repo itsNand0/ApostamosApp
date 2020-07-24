@@ -110,8 +110,6 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                                     mDatabase.child("PrimerPartido").push().setValue(map);
 
                                     Map<String, Object> map2 = new HashMap<>();
-                                    map2.put("usuario", name);
-                                    map2.put("email", email);
                                     map2.put("saldo", restaString);
                                     mDatabase.child("Usuarios").child(uid).updateChildren(map2);
                                     Toast.makeText(SeleccionPrimerPartido.this,"La apuesta esta hecha, Mucha Suerte.",Toast.LENGTH_LONG).show();
@@ -126,8 +124,6 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                                         mDatabase.child("PrimerPartido").push().setValue(map);
 
                                         Map<String, Object> map2 = new HashMap<>();
-                                        map2.put("usuario", name);
-                                        map2.put("email", email);
                                         map2.put("saldo", restaString);
                                         mDatabase.child("Usuarios").child(uid).updateChildren(map2);
                                         Toast.makeText(SeleccionPrimerPartido.this,"La apuesta esta hecha, Mucha suerte.",Toast.LENGTH_LONG).show();

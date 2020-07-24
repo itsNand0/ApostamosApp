@@ -3,9 +3,12 @@ package com.example.apostamos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,11 +51,7 @@ public class MenuAdministrador extends AppCompatActivity {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 String clave = dataSnapshot.getKey();
                                 String saldo = et_monto.getText().toString();
-                                String gmail = dataSnapshot.child("email").getValue().toString();
-                                String usuario = dataSnapshot.child("usuario").getValue().toString();
                                 Map<String, Object> map = new HashMap<>();
-                                map.put("email", gmail);
-                                map.put("usuario", usuario);
                                 map.put("saldo", saldo);
                                 mDataBase.child(clave).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -67,7 +66,7 @@ public class MenuAdministrador extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(MenuAdministrador.this,"email no registrado",Toast.LENGTH_LONG).show();
+
                         }
                     });
                 }else{
@@ -75,5 +74,21 @@ public class MenuAdministrador extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuadministrador, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+            if (id == R.id.usuarios){
+                Intent i = new Intent(this,UsuarioAdministrador.class);
+                startActivity(i);
+            }
+        return super.onOptionsItemSelected(item);
     }
 }

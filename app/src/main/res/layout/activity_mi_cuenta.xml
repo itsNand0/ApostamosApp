@@ -7,62 +7,73 @@
     android:background="@color/colorVerde"
     tools:context=".MiCuenta">
 
-    <TextView
-        android:id="@+id/tv_saldo"
-        android:layout_width="189dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nombre" />
-
     <Button
         android:id="@+id/btn_cargar_saldo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginRight="92dp"
         android:background="@drawable/boton_cargar_saldo"
         android:text="@string/btn_cargar_Saldo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_saldo" />
-
-    <Button
-        android:id="@+id/btn_retirar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/boton_redondo"
-        android:text="Retirar"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cargar_saldo"
         app:layout_constraintTop_toBottomOf="@+id/tv_saldo" />
 
     <TextView
         android:id="@+id/tv_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="76dp"
         android:gravity="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_foto" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_foto"
-        android:layout_width="140dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
+    <Button
+        android:id="@+id/btn_retirar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/boton_redondo"
+        android:text="Retirar"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cargar_saldo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_saldo" />
+
+    <TextView
+        android:id="@+id/tv_saldo"
+        android:layout_width="189dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:hint="@string/saldo"
+        android:textColorHint="@color/colorGhostWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/img_foto_circular" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_foto_circular"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginRight="156dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

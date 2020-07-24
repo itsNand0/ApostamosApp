@@ -14,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Cargar Saldo"
+        android:textColor="@color/colorGhostWhite"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +28,8 @@
         android:layout_marginRight="12dp"
         android:ems="10"
         android:hint="@string/email"
+        android:textColor="@color/colorGhostWhite"
+        android:textColorHint="@color/colorGhostWhite"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -38,6 +41,8 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/saldo"
+        android:textColor="@color/colorGhostWhite"
+        android:textColorHint="@color/colorGhostWhite"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/textView30"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />

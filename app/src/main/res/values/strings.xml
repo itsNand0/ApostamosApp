@@ -32,5 +32,6 @@
     <string name="cerrar_sesion">Cerrar Sesion</string>
     <string name="administrador">administrador</string>
     <string name="monto">Monto:</string>
+    <string name="usuarios">Usuarios</string>
 
 </resources>

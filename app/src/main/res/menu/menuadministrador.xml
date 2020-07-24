@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MenuPrincipal">
+    <item android:icon="@drawable/ic_more_"
+        android:title="mas"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/usuarios"
+                android:icon="@drawable/ic_account"
+                android:title="@string/usuarios"
+                />
+            <item
+                android:id="@+id/cargasaldo"
+                android:title="Cargar Saldo"
+                android:icon="@drawable/ic_money_"/>
+
+        </menu>
+    </item>
+</menu>

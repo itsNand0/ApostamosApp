@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -30,7 +32,7 @@ import java.util.Map;
 public class MiCuenta extends AppCompatActivity {
     private DatabaseReference mDataBase;
     private TextView tv_saldo,tv_nombre;
-    private Button btn_cargar,btn_retirar;
+    private Button btn_cargar,btn_retirar, btn_validar;
     private ImageView img_foto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,10 @@ public class MiCuenta extends AppCompatActivity {
         setContentView(R.layout.activity_mi_cuenta);
         tv_saldo = findViewById(R.id.tv_saldo);
         tv_nombre = findViewById(R.id.tv_nombre);
-        mDataBase = FirebaseDatabase.getInstance().getReference("Usuarios");
+        mDataBase = FirebaseDatabase.getInstance().getReference();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        img_foto = findViewById(R.id.img_foto);
+        img_foto = findViewById(R.id.img_foto_circular);
         Picasso.with(this).
                 load(user.getPhotoUrl()).
                 fit().
@@ -49,7 +51,7 @@ public class MiCuenta extends AppCompatActivity {
         tv_nombre.setText(user.getDisplayName());
 
         String email = user.getEmail();
-        Query query = mDataBase.orderByChild("email").equalTo(email);
+        Query query = mDataBase.child("Usuarios").orderByChild("email").equalTo(email);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -69,13 +71,6 @@ public class MiCuenta extends AppCompatActivity {
         btn_cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String uid = user.getUid();
-                String gmail = user.getEmail();
-                String usuario = user.getDisplayName();
-                Map<String, Object> map = new HashMap<>();
-                map.put("email", gmail);
-                map.put("usuario", usuario);
-                mDataBase.child(uid).setValue(map);*/
 
                 String emailcargar = user.getEmail();
                 Intent sendIntent = new Intent();
@@ -86,5 +81,31 @@ public class MiCuenta extends AppCompatActivity {
                 startActivity(sendIntent);
             }
         });
+
+        btn_validar = findViewById(R.id.button9);
+        btn_validar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = user.getUid();
+                String nombre = user.getDisplayName();
+                String saldo = "";
+                String email = user.getEmail();
+                Boolean administrador = false;
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("email",email);
+                map.put("usuario",nombre);
+                map.put("saldo",saldo);
+                map.put("permiso",administrador);
+                mDataBase.child("Usuarios").child(uid).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MiCuenta.this, "Gracias, su cuenta ha sido validada",Toast.LENGTH_LONG).show();
+                        btn_validar.setEnabled(false);
+                    }
+                });
+            }
+        });
+
     }
 }

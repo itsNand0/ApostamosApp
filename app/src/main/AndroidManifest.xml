@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MenuAdministrador"></activity>
+        <activity
+            android:name=".UsuarioAdministrador"
+            android:theme="@style/AppTheme"
+            />
+        <activity
+            android:name=".MenuAdministrador"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".MiCuenta" />
         <activity android:name=".SeleccionSextoPartido" />
         <activity android:name=".SeleccionQuintoPartido" />
