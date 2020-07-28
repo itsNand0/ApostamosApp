@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +59,7 @@ public class MiCuenta extends AppCompatActivity {
                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                    String saldo = dataSnapshot.child("saldo").getValue().toString();
                    tv_saldo.setText("Saldo: "+saldo+" Gs");
+                   btn_validar.setVisibility(View.INVISIBLE);
                }
             }
 
@@ -71,7 +73,6 @@ public class MiCuenta extends AppCompatActivity {
         btn_cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String emailcargar = user.getEmail();
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -88,20 +89,18 @@ public class MiCuenta extends AppCompatActivity {
             public void onClick(View v) {
                 String uid = user.getUid();
                 String nombre = user.getDisplayName();
-                String saldo = "";
                 String email = user.getEmail();
                 Boolean administrador = false;
 
                 Map<String, Object> map = new HashMap<>();
                 map.put("email",email);
                 map.put("usuario",nombre);
-                map.put("saldo",saldo);
                 map.put("permiso",administrador);
                 mDataBase.child("Usuarios").child(uid).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(MiCuenta.this, "Gracias, su cuenta ha sido validada",Toast.LENGTH_LONG).show();
-                        btn_validar.setEnabled(false);
+                        btn_validar.setVisibility(View.INVISIBLE);
                     }
                 });
             }
