@@ -25,7 +25,6 @@
         <activity android:name=".SeleccionCuartoPartido" />
         <activity android:name=".SeleccionTercerPartido" />
         <activity android:name=".SeleccionSegundoPartido" />
-        <activity android:name=".ActivityPrueba" />
         <activity android:name=".SeleccionPrimerPartido" />
         <activity
             android:name=".MenuPrincipal"

@@ -59,7 +59,7 @@
         android:id="@+id/img_foto_circular"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="156dp"
         android:layout_marginRight="156dp"
         app:layout_constraintEnd_toEndOf="parent"
