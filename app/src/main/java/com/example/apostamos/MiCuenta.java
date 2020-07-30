@@ -163,34 +163,44 @@ public class MiCuenta extends AppCompatActivity {
             }
         });
 
-        Button btn_enviar = view.findViewById(R.id.button7);
+        final Button btn_enviar = view.findViewById(R.id.button7);
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usuario = user.getDisplayName();
                 String uid = user.getUid();
-                String saldo_retirar = tv_saldo_retirar.getText().toString();
+                String email = user.getEmail();
+                final String saldo_retirar = tv_saldo_retirar.getText().toString();
                 String valor_retirar = et_valor_retirar.getText().toString();
                 String celular = et_celular.getText().toString();
                 int saldoint = Integer.parseInt(saldo_retirar);
                 int valorint = Integer.parseInt(valor_retirar);
-                if (!TextUtils.isEmpty(valor_retirar)){
-                    if (valorint <= saldoint){
-                        int resu = valorint - saldoint;
-                        Map<String,Object>map = new HashMap<>();
-                        map.put("retirar",valorint);
-                        map.put("usuario",usuario);
-                        map.put("celular",celular);
-                        mDataBase.child("Retiro").child(uid).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                               Toast.makeText(MiCuenta.this,"En unos minutos recibira su giro, muchas gracias",Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        Map<String,Object> map1 = new HashMap<>();
-                        map1.put("saldo",resu);
-                         mDataBase.child("Usuarios").child(uid).updateChildren(map1);
+                if (!TextUtils.isEmpty(valor_retirar)) {
+                    if (!TextUtils.isEmpty(celular)) {
+                        if (saldoint >= valorint) {
+                            final int resu = saldoint - valorint;
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("email", email);
+                            map.put("retirar", valorint);
+                            map.put("usuario", usuario);
+                            map.put("celular", celular);
+                            mDataBase.child("Retiro").child(uid).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(MiCuenta.this, "Su solicitud ha sido registrado, en el transcurso del dia recibira su giro.", Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(MiCuenta.this,MenuPrincipal.class);
+                                    startActivity(i);
+                                }
+                            });
+                            Map<String, Object> map1 = new HashMap<>();
+                            map1.put("saldo", resu);
+                            mDataBase.child("Usuarios").child(uid).updateChildren(map1);
+                        }
+                    } else {
+                        Toast.makeText(MiCuenta.this, "Agregue un numero al cual girar", Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    Toast.makeText(MiCuenta.this, "Agregue un monto a retirar", Toast.LENGTH_LONG).show();
                 }
             }
         });
