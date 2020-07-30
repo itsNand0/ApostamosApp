@@ -16,6 +16,10 @@
                 android:id="@+id/cargasaldo"
                 android:title="Cargar Saldo"
                 android:icon="@drawable/ic_money_"/>
+            <item
+                android:id="@+id/retiro"
+                android:title="Solicitud de retiro"
+                android:icon="@drawable/ic_local_offer"/>
 
         </menu>
     </item>

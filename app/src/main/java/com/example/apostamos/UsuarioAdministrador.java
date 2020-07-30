@@ -28,8 +28,7 @@ public class UsuarioAdministrador extends AppCompatActivity {
     private EditText et_email;
     private TextView tv_saldo, tv_nombre, tv_id;
     private DatabaseReference mDataBase;
-    private Button btn_actualizar, btn_eliminar, btn_buscar;
-    private RadioButton rb_administrador, rb_invitado;
+    private Button btn_eliminar, btn_buscar;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +112,11 @@ public class UsuarioAdministrador extends AppCompatActivity {
         if (id == R.id.cargasaldo){
             Intent i = new Intent(this,MenuAdministrador.class);
             startActivity(i);
-        }
+        }else
+            if (id == R.id.retiro){
+                Intent i = new Intent(this,SolicitudRetiroSaldo.class);
+                startActivity(i);
+            }
         return super.onOptionsItemSelected(item);
     }
 }

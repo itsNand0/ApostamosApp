@@ -88,7 +88,11 @@ public class MenuAdministrador extends AppCompatActivity {
             if (id == R.id.usuarios){
                 Intent i = new Intent(this,UsuarioAdministrador.class);
                 startActivity(i);
-            }
+            }else
+                if (id == R.id.retiro){
+                    Intent i = new Intent(this,SolicitudRetiroSaldo.class);
+                    startActivity(i);
+                }
         return super.onOptionsItemSelected(item);
     }
 }

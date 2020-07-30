@@ -178,7 +178,7 @@ public class MiCuenta extends AppCompatActivity {
                     if (valorint <= saldoint){
                         int resu = valorint - saldoint;
                         Map<String,Object>map = new HashMap<>();
-                        map.put("restirar",valorint);
+                        map.put("retirar",valorint);
                         map.put("usuario",usuario);
                         map.put("celular",celular);
                         mDataBase.child("Retiro").child(uid).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {

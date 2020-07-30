@@ -54,7 +54,6 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
 
         nAadaptador = new NAadaptador(this,listas);
         lv_apuestas.setAdapter(nAadaptador);
-
         mDatabase.child("PrimerPartido").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

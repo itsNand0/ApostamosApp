@@ -26,6 +26,8 @@
         <activity android:name=".SeleccionTercerPartido" />
         <activity android:name=".SeleccionSegundoPartido" />
         <activity android:name=".SeleccionPrimerPartido" />
+        <activity android:name=".SolicitudRetiroSaldo"
+                  android:theme="@style/AppTheme"/>
         <activity
             android:name=".MenuPrincipal"
             android:theme="@style/AppTheme" />
