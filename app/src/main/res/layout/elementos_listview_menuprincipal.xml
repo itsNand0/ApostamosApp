@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/tv_apuesta"
-        android:layout_width="91dp"
-        android:layout_height="19dp"
+        android:layout_width="118dp"
+        android:layout_height="20dp"
         android:text="TextView"
         android:textColor="@color/colorGhostWhite"
         android:textSize="14sp"
@@ -70,16 +70,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="23dp"
+        android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:text="vs"
         android:textColor="@color/colorGhostWhite"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintHorizontal_bias="0.722"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintVertical_bias="0.488" />
 
     <ImageView
         android:id="@+id/iv_club2"
@@ -100,16 +100,16 @@
 
     <TextView
         android:id="@+id/tv_club2"
-        android:layout_width="91dp"
-        android:layout_height="18dp"
+        android:layout_width="118dp"
+        android:layout_height="20dp"
+        android:gravity="right"
         android:text="TextView"
         android:textColor="@color/colorGhostWhite"
         android:textSize="14sp"
-        android:gravity="right"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.511" />
 </androidx.constraintlayout.widget.ConstraintLayout>

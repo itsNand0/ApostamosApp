@@ -71,7 +71,7 @@ public class MenuPrincipal extends AppCompatActivity {
         });
 
         sp_fechas = findViewById(R.id.sp_fechas);
-        ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,R.array.fechas,android.R.layout.simple_expandable_list_item_1);
+        final ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this,R.array.fechas,R.layout.spinner_item_personalizado);
         sp_fechas.setAdapter(spinnerAdapter);
         sp_fechas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,6 +91,23 @@ public class MenuPrincipal extends AppCompatActivity {
 
             }
         });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        mDataBase.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child("permiso").getValue().equals(true)){
+                    sp_fechas.setVisibility(View.VISIBLE);
+                }else {
+                    sp_fechas.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -100,8 +117,8 @@ public class MenuPrincipal extends AppCompatActivity {
         listaJuegos.add(new ListadePartidos(R.drawable.guairena,"Guaireña",R.drawable.guarani,"Guarani"));
         listaJuegos.add(new ListadePartidos(R.drawable.generaldiaz,"Gral Diaz",R.drawable.san_lorenzo,"San Lorenzo"));
         listaJuegos.add(new ListadePartidos(R.drawable.river_plate,"River Plate",R.drawable.nacional,"Nacional"));
-        listaJuegos.add(new ListadePartidos(R.drawable.sol,"Sol",R.drawable.club_doce_de_octubre_,"12 de octubre"));
-        listaJuegos.add(new ListadePartidos(R.drawable.cerro_porteno,"CerroPorteño",R.drawable.club_libertad,"Libertad"));
+        listaJuegos.add(new ListadePartidos(R.drawable.sol,"Sol de America",R.drawable.club_doce_de_octubre_,"12 de octubre"));
+        listaJuegos.add(new ListadePartidos(R.drawable.cerro_porteno,"Cerro Porteño",R.drawable.club_libertad,"Libertad"));
         return listaJuegos;
     }
 
