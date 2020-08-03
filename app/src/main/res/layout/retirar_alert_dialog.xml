@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3636DF">
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/textView17"
@@ -85,9 +85,9 @@
         android:id="@+id/button7"
         android:layout_width="79dp"
         android:layout_height="37dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/boton_redondo"
         android:text="Enviar"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"

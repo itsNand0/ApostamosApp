@@ -141,6 +141,7 @@ public class MiCuenta extends AppCompatActivity {
         View view = inflater.inflate(R.layout.retirar_alert_dialog, null);
         builder.setView(view);
         AlertDialog dialog = builder.create();
+        dialog.setTitle("Retirar");
         dialog.show();
         final TextView tv_saldo_retirar = view.findViewById(R.id.textView17);
         final EditText et_valor_retirar = view.findViewById(R.id.editTextNumber);

@@ -1,17 +1,22 @@
 package com.example.apostamos;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,10 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 
 public class SeleccionPrimerPartido extends AppCompatActivity {
@@ -38,7 +45,6 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccion_primer_partdio);
-        ListView lv_apuestas = findViewById(R.id.lv_apuestas);
         et_monto = findViewById(R.id.et_monto);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         ImageView club1 = findViewById(R.id.imageView);
@@ -52,7 +58,9 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
         rb_club1.setText(item.getClub1());
         rb_club2.setText(item.getClub2());
 
+
         nAadaptador = new NAadaptador(this,listas);
+        final ListView lv_apuestas = findViewById(R.id.lv_apuestas);
         lv_apuestas.setAdapter(nAadaptador);
         mDatabase.child("PrimerPartido").addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,6 +80,28 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
 
             }
         });
+
+        lv_apuestas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SeleccionPrimerPartido.this);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View view1 = inflater.inflate(R.layout.alert_dialog_ir_contra,null);
+                TextView Usuario = view1.findViewById(R.id.textView42);
+                TextView Monto = view1.findViewById(R.id.textView40);
+                TextView Club = view1.findViewById(R.id.textView41);
+                ListaApuestas ItemPosition = listas.get(position);
+                Usuario.setText("Oponente: " +ItemPosition.getApostador());
+                Monto.setText("Monto:  "+ItemPosition.getClub());
+                Club.setText("Club:  "+ItemPosition.getApuesta());
+
+                builder.setView(view1);
+                AlertDialog dialog = builder.create();
+                dialog.setTitle("Ir en Contra");
+                dialog.show();
+            }
+        });
     }
 
     public void apostar(View view){
@@ -88,6 +118,7 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                         String name = user.getDisplayName();
                         String email = user.getEmail();
                         String uid = user.getUid();
+
                         String caso1 = rb_club1.getText().toString();
                         String caso2 = rb_club2.getText().toString();
                         String monto = et_monto.getText().toString();
@@ -150,4 +181,5 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
             Toast.makeText(SeleccionPrimerPartido.this,"Debe iniciar sesion",Toast.LENGTH_SHORT).show();
         }
     }
+
 }
