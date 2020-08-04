@@ -23,9 +23,9 @@
         android:layout_height="23dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintBottom_toTopOf="@+id/button12"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -33,8 +33,8 @@
         android:layout_width="247dp"
         android:layout_height="26dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginRight="82dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginRight="81dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,5 +44,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="127dp" />
+        app:layout_constraintGuide_begin="152dp" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Cancelar"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/button8" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Confirmar"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

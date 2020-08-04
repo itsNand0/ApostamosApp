@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +49,7 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
         setContentView(R.layout.activity_seleccion_primer_partdio);
         et_monto = findViewById(R.id.et_monto);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        ImageView club1 = findViewById(R.id.imageView);
+        final ImageView club1 = findViewById(R.id.imageView);
         ImageView club2 = findViewById(R.id.imageView3);
         rb_club1 = findViewById(R.id.radioButton);
         rb_club2 = findViewById(R.id.radioButton2);
@@ -88,18 +90,65 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
 
                 LayoutInflater inflater = getLayoutInflater();
                 View view1 = inflater.inflate(R.layout.alert_dialog_ir_contra,null);
-                TextView Usuario = view1.findViewById(R.id.textView42);
-                TextView Monto = view1.findViewById(R.id.textView40);
+                final TextView Usuario = view1.findViewById(R.id.textView42);
+                final TextView Monto = view1.findViewById(R.id.textView40);
                 TextView Club = view1.findViewById(R.id.textView41);
                 ListaApuestas ItemPosition = listas.get(position);
-                Usuario.setText("Oponente: " +ItemPosition.getApostador());
-                Monto.setText("Monto:  "+ItemPosition.getClub());
-                Club.setText("Club:  "+ItemPosition.getApuesta());
+                Usuario.setText(ItemPosition.getApostador());
+                Monto.setText(ItemPosition.getClub());
+                Club.setText(ItemPosition.getApuesta());
 
                 builder.setView(view1);
                 AlertDialog dialog = builder.create();
                 dialog.setTitle("Ir en Contra");
                 dialog.show();
+
+                Button btn_confirmar = view1.findViewById(R.id.button8);
+                btn_confirmar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        final String uid = user.getUid();
+                        final String email = user.getEmail();
+                        final String usuario = user.getDisplayName();
+                        mDatabase.child("Usuarios").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String ApuestaOponente = Monto.getText().toString();
+
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    String SaldoUsuario = dataSnapshot.child("saldo").getValue().toString();
+                                    int intSaldoUsuario = Integer.parseInt(SaldoUsuario);
+                                    final int intApuestaOponente = Integer.parseInt(ApuestaOponente);
+                                    if (intSaldoUsuario >= intApuestaOponente) {
+                                        int resultado = intSaldoUsuario - intApuestaOponente;
+                                        final Map<String,Object> map = new HashMap<>();
+                                        map.put("saldo", resultado);
+                                        mDatabase.child("Usuarios").child(uid).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(SeleccionPrimerPartido.this,"Apuesta Hecha, se ha descontado "+intApuestaOponente+" de su Saldo",Toast.LENGTH_SHORT).show();
+                                                Map<String, Object> map1 = new HashMap<>();
+                                                map1.put("En contra de",Usuario);
+                                                map1.put("Monto",Monto);
+                                                map1.put("email", email);
+                                                map1.put("usuario", usuario);
+                                                mDatabase.child("PrimerPartido").push().setValue(map1);
+                                            }
+                                        });
+                                    }else {
+                                        Toast.makeText(SeleccionPrimerPartido.this,"Saldo insuficiente",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
             }
         });
     }
