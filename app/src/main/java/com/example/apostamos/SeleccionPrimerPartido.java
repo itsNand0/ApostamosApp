@@ -90,9 +90,9 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
 
                 LayoutInflater inflater = getLayoutInflater();
                 View view1 = inflater.inflate(R.layout.alert_dialog_ir_contra,null);
-                final TextView Usuario = view1.findViewById(R.id.textView42);
-                final TextView Monto = view1.findViewById(R.id.textView40);
-                TextView Club = view1.findViewById(R.id.textView41);
+                final EditText Usuario = view1.findViewById(R.id.editTextTextPersonName2);
+                final EditText Monto = view1.findViewById(R.id.editTextTextPersonName);
+                TextView Club = view1.findViewById(R.id.textView43);
                 ListaApuestas ItemPosition = listas.get(position);
                 Usuario.setText(ItemPosition.getApostador());
                 Monto.setText(ItemPosition.getClub());
@@ -111,13 +111,13 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                         final String uid = user.getUid();
                         final String email = user.getEmail();
                         final String usuario = user.getDisplayName();
-                        mDatabase.child("Usuarios").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        mDatabase.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String ApuestaOponente = Monto.getText().toString();
-
                                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                                     String SaldoUsuario = dataSnapshot.child("saldo").getValue().toString();
+                                    final String ApuestaOponente = Monto.getText().toString();
+                                    final String UsuarioOponente = Usuario.getText().toString();
                                     int intSaldoUsuario = Integer.parseInt(SaldoUsuario);
                                     final int intApuestaOponente = Integer.parseInt(ApuestaOponente);
                                     if (intSaldoUsuario >= intApuestaOponente) {
@@ -129,8 +129,8 @@ public class SeleccionPrimerPartido extends AppCompatActivity {
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(SeleccionPrimerPartido.this,"Apuesta Hecha, se ha descontado "+intApuestaOponente+" de su Saldo",Toast.LENGTH_SHORT).show();
                                                 Map<String, Object> map1 = new HashMap<>();
-                                                map1.put("En contra de",Usuario);
-                                                map1.put("Monto",Monto);
+                                                map1.put("club", "Contra "+ UsuarioOponente);
+                                                map1.put("monto", intApuestaOponente);
                                                 map1.put("email", email);
                                                 map1.put("usuario", usuario);
                                                 mDatabase.child("PrimerPartido").push().setValue(map1);

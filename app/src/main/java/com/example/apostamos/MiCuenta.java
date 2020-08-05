@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +19,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +27,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,7 +134,7 @@ public class MiCuenta extends AppCompatActivity {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         AlertDialog.Builder builder = new AlertDialog.Builder(MiCuenta.this);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.retirar_alert_dialog, null);
+        View view = inflater.inflate(R.layout.alert_dialog_retirar, null);
         builder.setView(view);
         AlertDialog dialog = builder.create();
         dialog.setTitle("Retirar");
