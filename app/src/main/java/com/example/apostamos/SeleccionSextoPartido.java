@@ -68,7 +68,6 @@ public class SeleccionSextoPartido extends AppCompatActivity {
                     listas.add(new ListaApuestas(nombre,equipo,apuesta));
                     nAadaptador.notifyDataSetChanged();
                 }
-
             }
 
             @Override
