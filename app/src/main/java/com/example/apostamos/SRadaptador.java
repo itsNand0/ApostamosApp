@@ -41,10 +41,12 @@ public class SRadaptador extends BaseAdapter {
         TextView usuario = view.findViewById(R.id.textView33);
         TextView retirar = view.findViewById(R.id.textView39);
         TextView celular = view.findViewById(R.id.textView37);
+        TextView email = view.findViewById(R.id.textView44);
 
         usuario.setText(listaSolicitudRetiro.getUsuario());
         retirar.setText(listaSolicitudRetiro.getRetirar());
         celular.setText(listaSolicitudRetiro.getCelular());
+        email.setText(listaSolicitudRetiro.getEmail());
 
         return view;
     }

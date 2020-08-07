@@ -1,9 +1,12 @@
 package com.example.apostamos;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -36,10 +39,11 @@ public class SolicitudRetiroSaldo extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String email = dataSnapshot.child("email").getValue().toString();
                     String celular = dataSnapshot.child("celular").getValue().toString();
                     String usuario = dataSnapshot.child("usuario").getValue().toString();
                     String retirar = dataSnapshot.child("retirar").getValue().toString();
-                    listaSolicitudRetiros.add(new ListaSolicitudRetiro(usuario,celular,retirar));
+                    listaSolicitudRetiros.add(new ListaSolicitudRetiro(usuario,celular,retirar,email));
                     sRadaptador.notifyDataSetChanged();
                 }
             }
@@ -49,6 +53,7 @@ public class SolicitudRetiroSaldo extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override
